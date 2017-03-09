@@ -72,6 +72,12 @@ public class RunAllExperiments {
         }
 
         /********************** Start code **********************/
+
+        runExperiment(src_domain, tgt_domain, filename_src, filename_tgt, numSplits, train_split, max_iter_DiAd, radius, numInstancesToSamplePerIter, upsampleTrainOrTest);
+
+    }
+
+    private static void runExperiment(String src_domain, String tgt_domain, String filename_src, String filename_tgt, int numSplits, double train_split, int max_iter_DiAd, double radius, int numInstancesToSamplePerIter, boolean upsampleTrainOrTest) throws Exception{
         System.out.println("Source="+filename_src);
         System.out.println("Target="+filename_tgt);
 
@@ -91,13 +97,12 @@ public class RunAllExperiments {
         ArrayList<Performance> fePerformance = new ArrayList<Performance>();
 
         for (int i = 1; i <= numSplits; i++) {
-
-            seed+=213; // seed changed so that we have a new test split everytime. For complete randomization, simply remove seed
+            seed += 213; // seed changed so that we have a new test split everytime. For complete randomization, simply remove seed
 
             // Get data split for source
             Pair<Instances, Instances> pair = Utils.trainTestSplit(src_data, train_split, seed);
             Instances upsampled_src_train = pair.getFirst();
-            if(upsampleTrainOrTest) // upsample the train set
+            if (upsampleTrainOrTest) // upsample the train set
                 upsampled_src_train = Utils.upsample(pair.getFirst(), "1", "0");
             Instances src_test = pair.getSecond();
 //            if(upsampleTrainAndTest) // commented because we don't want to upsample test set
@@ -106,7 +111,7 @@ public class RunAllExperiments {
             // Get data split for target
             pair = Utils.trainTestSplit(tgt_data, train_split, seed);
             Instances upsampled_tgt_train = pair.getFirst();
-            if(upsampleTrainOrTest) // upsample the train set
+            if (upsampleTrainOrTest) // upsample the train set
                 upsampled_tgt_train = Utils.upsample(pair.getFirst(), "1", "0");
             Instances tgt_test = pair.getSecond();
 //            if(upsampleTrainAndTest) // commented because we don't want to upsample test set
@@ -146,8 +151,7 @@ public class RunAllExperiments {
 //            fePerformance.add(new Performance(performance));
 
 
-            System.out.println("Finished Iter="+i+" target F1 of SourceOnly, Diad, DiAd random, and S+T="+temp0+", "+temp1 + ", "+temp2+" and "+performance[4]+"\n");
-
+            System.out.println("Finished Iter=" + i + " target F1 of SourceOnly, Diad, DiAd random, and S+T=" + temp0 + ", " + temp1 + ", " + temp2 + " and " + performance[4] + "\n");
         }
         System.out.println("Printing final results");
         System.out.println("Source="+src_domain);
@@ -176,6 +180,7 @@ public class RunAllExperiments {
         System.out.println("DiAd experiment");
         System.out.println("-------------------------------------");
         Utils.printMedians(diadPerformance);
+
     }
 
     private static double[] trainTestSimpleClassifier(Instances train, Instances src_test, Instances tgt_test) throws Exception{
