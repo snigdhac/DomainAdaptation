@@ -30,14 +30,14 @@ public class RunAllExperiments {
      */
     public static void main(String[] args) throws Exception {
         /********************** Parameters *******************/
-        int numSplits = 2; // number of times to redo experiment
+        int numSplits = 5; // number of times to redo experiment
         double train_split = 0.6; // percent of data to belong to trainset
         boolean upsampleTrainOrTest = true; // Do you want to upsample train or test set?
         String taskName = "IP"; // name of task (helps in determining data location). Can be "IP" or "CD" ONLY.
 
-        int max_iter_DiAd  =1000; // parameter for Diad-radius
-        double radius =0.1; // parameter for Diad-radius
-        int numInstancesToSamplePerIter =10; // parameter for Diad-random. Number of instances to be randomly sampled per iteration
+        int max_iter_DiAd = 1000; // parameter for Diad-radius
+        double radius = 0.1; // parameter for Diad-radius
+        int numInstancesToSamplePerIter = 10; // parameter for Diad-random. Number of instances to be randomly sampled per iteration
 
         // uncomment the following line if you want to use Weka's logistic regression (Also check line 26-27)
         model = new Logistic();
