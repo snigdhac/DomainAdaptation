@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="LibLINEAR">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Externaljars/liblinearJar/LibLINEAR.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
